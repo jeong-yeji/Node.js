@@ -8,7 +8,6 @@ const path = require('path');
 dotenv.config();
 const indexRouter = require('./routes'); // index.js는 생략 가능
 const userRouter = require('./routes/user');
-const router = require('./routes');
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
@@ -34,16 +33,6 @@ app.use(
 //Router 객체로 라우팅 깔끔하게 관리
 app.use('/', indexRouter);
 app.use('/user', userRouter);
-
-// 주소는 같지만 메소드 다른 코드 하나로 처리 가능
-router
-    .route('/abc')
-    .get((req, res) => {
-        res.send('GET /abc');
-    })
-    .post((req, res) => {
-        res.send('POST /abc');
-    });
 
 app.use((req, res, next) => {
     res.status(404).send('Not Found');
