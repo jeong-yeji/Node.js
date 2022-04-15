@@ -16,7 +16,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const dotenv = require('dotenv');
-dotenv.config({ path: path.resolve(__dirname, '../../.ev') });
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 const app = express();
 
 // 포트 설정
