@@ -24,10 +24,12 @@ app.get('/', (req, res, next) => {
         });
 });
 
+// READ
 app.get('/customer', (req, res) => {
     res.sendFile(__dirname + '/customer.html');
 });
 
+// CREATE : promise 사용
 app.post('/customer', (req, res) => {
     let body = req.body;
 
@@ -44,6 +46,25 @@ app.post('/customer', (req, res) => {
         .catch((err) => {
             console.log(err);
         });
+});
+
+// UPDATE : async/await 사용
+app.put('/customer/:id', async (req, res) => {
+    const customer = await models.newCustomer.update({
+        where: { id: req.params.id },
+        name: body.name,
+        age: body.age,
+        sex: body.sex,
+    });
+    return res.json(customer);
+});
+
+// DELETE : async/await 사용
+app.delete('/customer/:id', async (req, res) => {
+    const customer = await models.newCustomer.destroy({
+        where: { id: req.params.id },
+    });
+    return res.json(customer);
 });
 
 // 서버와 포트 연결
