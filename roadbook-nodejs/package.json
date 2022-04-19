@@ -24,7 +24,8 @@
         "request": "^2.88.2",
         "sequelize": "^6.19.0",
         "sequelize-cli": "^6.4.1",
-        "uuid-apikey": "^1.5.3"
+        "uuid-apikey": "^1.5.3",
+        "ws": "^8.5.0"
     },
     "devDependencies": {
         "nodemon": "^2.0.15"
