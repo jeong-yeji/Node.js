@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Socket.io</title>
+    </head>
+    <body>
+        <div>socket.io 모듈로 웹 소켓을 알아봅시다.</div>
+        <script src="/socket.io/socket.io.js"></script>
+        <!-- io 제공 script-->
+        <script>
+            // websocket을 지원하는 브라우저가 있을 수 있기 때문에
+            // http의 pooling을 시도한 후 websocket으로 연결
+            // => io.connect()인자에 ws 프로토콜이 아닌 http 프로토콜 생략
+            const socket = io.connect('http://localhost:8080', {
+                path: '/socket.io',
+                transport: ['websocket'],
+                // IE9 버전을 제외한 모든 브라우저는 websocket을 지원하므로 pooling 생략 가능 => transport 주석 처리
+            });
+            // socket.io는 자체적으로 JSON.stringify(), JSON.parse()가 내부적으로 실행됨
+            // => ws에서 event.data로 데이터를 받아오는 것과 달리
+            // socket.io는 data로 바로 사용 가능
+            socket.on('from server', function (data) {
+                // event listener, 여러개 할당 가능
+                console.log(data);
+                socket.emit('from client', 'Message From Client');
+            });
+        </script>
+    </body>
+</html>
