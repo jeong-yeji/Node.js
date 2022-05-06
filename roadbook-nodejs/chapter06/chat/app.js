@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
         io.emit('has connected', { username: username, usersList: users });
     });
 
-    socket.on('has disconnected', () => {
+    socket.on('disconnect', () => {
         users.splice(users.indexOf(name), 1); // 사용자 제거
         io.emit('has disconnected', { username: name, usersList: users });
     });
